@@ -12,11 +12,12 @@ terraform {
 }
 
 inputs = {
-  name     = "main-vpc"
-  vpc_cidr = "10.0.0.0/16"
+  name        = "main-vpc"
+  environment = "prod"
+  vpc_cidr    = "10.0.0.0/16"
 
   # 3 AZs
-  availability_zones = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+  azs = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
 
   private_subnet_cidrs  = [cidrsubnet("10.0.0.0/16", 4, 0), cidrsubnet("10.0.0.0/16", 4, 1), cidrsubnet("10.0.0.0/16", 4, 2)]
   public_subnet_cidrs   = [cidrsubnet("10.0.0.0/16", 4, 3), cidrsubnet("10.0.0.0/16", 4, 4), cidrsubnet("10.0.0.0/16", 4, 5)]
@@ -25,8 +26,7 @@ inputs = {
   enable_nat_gateway = true
   single_nat_gateway = false
 
-  enable_vpn_gateway = false
-  enable_flow_logs   = true
+  enable_flow_logs = true
 
   tags = {
     Team        = "platform"
