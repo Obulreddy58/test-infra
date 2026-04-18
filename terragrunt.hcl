@@ -32,7 +32,7 @@ remote_state {
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = local.aws_region
     encrypt        = true
-    dynamodb_table = "keystone-tfstate-lock"
+    use_lockfile    = true
   }
 }
 
