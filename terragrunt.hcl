@@ -36,18 +36,13 @@ remote_state {
   }
 }
 
-# AWS provider — assumes role into the target account
+# AWS provider - credentials are provided by OIDC in the workflow
 generate "provider" {
   path      = "provider.tf"
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "aws" {
   region = "${local.aws_region}"
-
-  assume_role {
-    role_arn = "arn:aws:iam::${local.account_id}:role/GithubActionsRole"
-  }
-
   default_tags {
     tags = {
       ManagedBy   = "terragrunt"
